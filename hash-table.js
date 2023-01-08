@@ -56,6 +56,9 @@ class HashTable {
       this.insertNoCollisions(key,value)
     }
     else{
+      while (oldNode.next) {
+        oldNode = oldNode.next;
+      }
       this.data[index] = newNode
       this.data[index].next =  oldNode
       this.count++
@@ -69,8 +72,15 @@ class HashTable {
     if(this.data[index] == null){
       this.insertNoCollisions(key,value)
     }
-    else{
-      this.insertWithHashCollisions(key,value)
+    else {
+      let head = this.data[index]
+      while (head) {
+        if (head.key === key && head.value !== value) {
+          return head.value = value;
+        }
+        head = head.next;
+      }
+      this.insertWithHashCollisions(key, value);
     }
   }
 }
