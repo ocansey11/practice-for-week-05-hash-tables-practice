@@ -47,21 +47,31 @@ class HashTable {
 
   insertWithHashCollisions(key, value) {
     // Your code here
-    // let index = this.hashMod(key)
-    // let newNode =  new KeyValuePair(key,value)
-    // this.data[index].next = newNode
+    let index = this.hashMod(key)
+    let newNode  =  new KeyValuePair(key,value)
+    let oldNode = this.data[index]
+
+
+    if(this.data[index] == null){
+      this.insertNoCollisions(key,value)
+    }
+    else{
+      this.data[index] = newNode
+      this.data[index].next =  oldNode
+      this.count++
+    }
   }
 
   insert(key, value) {
     // Your code here
-    // let index = this.hashMod(key)
+    let index = this.hashMod(key)
 
-    // if(this.data[index] == undefined){
-    //   this.insertNoCollisions(key,value)
-    // }
-    // else{
-    //   this.insertWithHashCollisions(key,value)
-    // }
+    if(this.data[index] == null){
+      this.insertNoCollisions(key,value)
+    }
+    else{
+      this.insertWithHashCollisions(key,value)
+    }
   }
 }
 
